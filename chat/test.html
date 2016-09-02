@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Document</title>
+</head>
+<body>
+   <input type="text" id="text">
+   <button id="btn">发送</button>
+   <div id="msg">
+      
+   </div>
+</body>
+      <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+      <script type="text/javascript">
+         var ws = new WebSocket("ws://localhost:8000/echo");
+         ws.onopen = function()
+         {                 
+            ws.send("new friend");
+         };
+         ws.onerror = function(){
+             console.log("error");
+         };
+         ws.onmessage = function (evt) 
+         { 
+            var received_msg = evt.data;
+            console.log(received_msg);
+            $a = $("<li>"+received_msg+"</li>");
+            $("#msg").append($a);
+         };
+         ws.onclose = function()
+         { 
+            // websocket is closed.
+            alert("Connection is closed..."); 
+         };
+         $("#btn").click(function(){
+            msg = $("#text").val();
+            ws.send(msg);
+         });
+      </script>
+</html>
