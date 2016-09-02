@@ -5,6 +5,6 @@
 公共聊天室
 发送ajax 接收laravel Echo
 
-~~~
-npm install
-~~~
+参照`.env.example`
+
+需要使用`npm install`
